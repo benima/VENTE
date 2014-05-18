@@ -1,0 +1,118 @@
+@CHARSET "UTF8";
+
+body {
+	background-color: #575757;
+} 
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#container {
+	width: 850px;
+	height: 700px;
+	/*border: 2px solid #fff;*/
+	margin: 0 auto;
+}
+
+.titre {
+	text-align: center;
+	front-familly: "Century Gothic", "Helvetica Neue", Helvetica, sans-serif;
+	color: #fff; 
+	font-size: 3.0em;
+	text-shadow: 0px 0px 12px #ccc;
+}
+
+/* Menu principale */
+.nav {
+	/*list-style: none;
+	margin: 0px;
+	padding: 0px; */
+	background: #e8e5e5;
+}
+
+.nav > li {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	width: 200px;
+	border-right: 2px solid #000;
+	height: 30px;
+	margin: 0 -5px 0 0;
+}
+
+.nav > li > a {
+	display: block;
+	color: #000;
+	text-decoration: none;
+	front-familly: "Century Gothic", "Helvetica Neue", Helvetica, sans-serif;
+	front-weight: bold;
+	font-size: 1.3em;
+	width: inherit;
+	height: inherit;
+	border: 1px solide #fff;
+	text-align: center;
+	lign-height: 40px;
+	
+	-webkit-transition: all ease-in 0.5s;
+	-moz-transition: all ease-in 0.5s;
+	-ms-transition: all ease-in 0.5s;
+	-o-transition: all ease-in 0.5s;
+	transition: all ease-in 0.5s;
+}
+
+.nav > li:hover > a {
+	background: #161616;
+	color: #fff;
+	
+}
+
+.nav > li:hover > .dropdown {
+	opacity: 1;
+	top: 40px;
+	/*display: block;*/
+}
+
+/* Menu secondaire */
+.nav > li > .dropdown {
+	position: absolute;
+	background: #161616;
+	/*display: none;*/
+	width: 200px;
+	top: -300px;
+	opacity: 0;
+	
+	-webkit-transition: all ease-in 0.5s;
+	-moz-transition: all ease-in 0.5s;
+	-ms-transition: all ease-in 0.5s;
+	-o-transition: all ease-in 0.5s;
+	transition: all ease-in 0.5s;	
+	/* margin:0;
+	padding: 0;
+	list-style: none; */
+}
+
+.nav > li > .dropdown > li {
+	weight: inherit;
+	height: 40px;
+
+}
+
+.nav > li > .dropdown > li > a {
+	display: block;
+	width: inherit;
+	height: inherit;
+	line-height: 40px;
+	padding: 0 0 0 5px;
+	color: #fff;
+	text-decoration: none;
+}
+
+.nav > li > .dropdown > li:hover > a {
+	background: #fff;  /* #e8e5e5; */
+	color: #161616;
+	text-align: center;
+}
+
