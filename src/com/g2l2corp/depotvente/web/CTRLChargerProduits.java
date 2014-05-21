@@ -60,14 +60,21 @@ public class CTRLChargerProduits extends HttpServlet {
 		//String fichierProduits = request.getParameter("fichierProduits");
 		//System.out.println("LE FICHER TELECHARGER EST: "+fichierProduits);
 		
-		if ((action != null) && (action.equals("Charger"))) {
+		System.out.println("ACTION = "+action+"\n *************************");
+		
+		if ((action != null) && (action.equals("OK"))) {
 			// le bouton submit "Valider" a été cliqué. On recupère les valeurs entrées.
 			String fichierProduits = request.getParameter("ficherProduits");
 			System.out.println("LE FICHER TELECHARGER EST: "+fichierProduits);
-			
+			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
+			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
+			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
+			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
+			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
 			/* On lance le chargement des produits */
 			try {
 				System.out.println("111111111111111111111111111111111111111111");
+				System.out.println(fichierProduits);
 				produits = daoProduit.chargerProduit(fichierProduits);
 				System.out.println("222222222222222222222222222222222222222222");
 			} catch (DAOException e) {

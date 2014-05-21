@@ -36,15 +36,11 @@ public class ProduitDAOMySQL implements ProduitDAO {
 		try {
 			// créer un contexte dans l'annuaire
 			ic = new InitialContext(); 
-			System.out.println("IC"+ic);
-			System.out.println("AVANT DATASOURCE !!");
-			//ds = (DataSource)ic.lookup("jdbc/sigdv");
 			ds = (DataSource)ic.lookup("jdbc/sigdv");
-			System.out.println("APRES DATASOURCE !!");
 		} catch (NamingException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
-		}		
+		}
 	} // Constructeur.
 	
 	// Rechercher tous les produits en vente:
@@ -259,15 +255,19 @@ public class ProduitDAOMySQL implements ProduitDAO {
 	
 	// Methode de chargement de produit via un fichier
 	public Collection<Produit> chargerProduit(String fichier) throws DAOException {
-		
+		System.out.println("LE NOM DU FICHIER: "+fichier+"\n #############################################");
+		System.out.println("DEBUT  CHARGER PRODUIT !!!!!!!!");
+		System.out.println("########################################################");
 		// Initialisation de la connexion
 		Connection connexion = null;
 		
 		// Definition de la liste des produits resultante:
 		List<Produit> listProduits = new ArrayList<>();
 		try {
+			System.out.println("DANS TRY DE CHARGER PRODUIT !! \n #############################################");
 			//FileReader fic= new FileReader("C:/Users/BEN/Documents/CQP/STAGE2014-01/SWSandro/Docs/FicherProduit.csv");
 			FileReader fic= new FileReader(fichier);
+			System.out.println("FIN OUVERTURE EN LECTURE DU FICHIER !! \n #############################################");
 			BufferedReader br = new BufferedReader (fic);
 			String line=null;
 			String [] donnees;
@@ -281,7 +281,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			connexion = DriverManager.getConnection(url, user, password);
 			// Preparation de l'objet qui gère la requête:
 			Statement statement = connexion.createStatement();
-			
+						
 			// Lecture du fichier ligne par ligne:
 			while ((line=br.readLine()) != null) {
 				//System.out.println(line);

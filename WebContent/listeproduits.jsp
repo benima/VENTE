@@ -37,7 +37,7 @@
 			<li>
 				<a href="#">Administration</a>
 				<ul class="dropdown">
-					<li><a href="#">Les Fournisseurs</a></li>
+					<li><a href="CTRLFournisseur?action=listefournisseurs">Les Fournisseurs</a></li>
 					<li><a href="#">Creer un Fournisseur</a></li>
 					<li><a href="#">Les utilisateurs</a></li>
 					<li><a href="#">Creer un utilisateur</a></li>

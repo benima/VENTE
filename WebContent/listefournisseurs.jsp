@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/style02.css">
 		<title>G2L2Corp: Depôt Vente</title>
 	</head>
 <body>
@@ -42,28 +44,40 @@
 				</ul>
 			</li>
 		</ul> <!-- Fin de la class nav (navigation)  -->
-		<form name="chargerproduits" method="post" action="CTRLChargerProduits" >
-			<fieldset>
-			    <legend><h2>Entrer le chemin complet du fichier contenant des produits au bon format.</h2></legend>
-			    <p>
-			    	Le nom de votre fichier*: <input type="file" name="fichierProduits"  required />
-			    	<label style="color:red">${erreurs_chargerfichier.get("nom")}</label><br />
-			    </p>
-			    <p><h3>Recommandations:</h3></p>
-			    <p style="background-color:#85C630">
-			    	Exemple du nom de fichier: <span>FichierProduits.csv</span><br />
-			    	Votre fichier doit être placé dans le repertoire suivant: <span>../../../</span><br />
-			    	Ce fichier doit être sous la forme: <br />
-			    	<span>Nom Complet du fournisseur;Nom du produit;Quantité;Prix</span><br />
-			    	Exemple de ligne: <span>Dupont Durand;produit1;5;30</span><br />
-			    	Merci d'avance de respecter cette procédure.<br />
-			    	Bien Cordialement,<br />
-			    	Equipe G2L2 Corp.
-			    </p>
-			    <p><input type="reset" value="Effacer" name="action" /> <input type="submit" value="OK" name="action" /></p><br />
-			</fieldset>
-		</form>
+		<p>
+			<table class="pv-table">
+				<caption class="leTitre"><h2>La liste de tous les Fournisseurs</h2></caption>
+				<thead class="ttable"> <!-- En-tête du tableau -->
+			       <tr>
+			           <th>ID Fni</th>
+			           <th>Nom Fournisseur</th>
+			           <th>Adresse Postale</th>
+			           <th>Adresse Mail</th>
+			           <th>Telephone</th>
+			       </tr>
+			   </thead>
+			   <tfoot class="ttable"> <!-- Pied de tableau -->
+			       <tr>
+			           <th>ID Fni</th>
+			           <th>Nom Fournisseur</th>
+			           <th>Adresse Postale</th>
+			           <th>Adresse Mail</th>
+			           <th>Telephone</th>
+			       </tr>
+			   </tfoot>
+			   <tbody> <!-- Corps du tableau -->
+			   <c:forEach items="${listeFournisseurs}" var="fournisseur">
+				 <tr>
+				 	 <td>${fournisseur.getId()}</td>
+				     <td>${fournisseur.getNom()}</td>
+				     <td>${fournisseur.getAdresse()}</td>
+				     <td>${fournisseur.getEmail()}</td>
+				     <td>${fournisseur.getTelephone()}</td>
+				</tr>
+				</c:forEach>
+			  </tbody>	
+		  </table>
+	  </p>
 	</div>
-	
 </body>
 </html>
