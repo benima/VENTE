@@ -26,7 +26,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 	private static final String NOM_DRIVER="com.mysql.jdbc.Driver";
 	private static final String url = "jdbc:mysql://localhost:3306/sigdv";
 	private static final String user = "root";
-	private static final String password = "manager";
+	private static final String password = "admin";
 	
 	private DataSource ds;
 
@@ -40,6 +40,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			System.out.println("AVANT DATASOURCE !!");
 			//ds = (DataSource)ic.lookup("jdbc/sigdv");
 			ds = (DataSource)ic.lookup("jdbc/sigdv");
+			System.out.println("datasource "+ds);
 			System.out.println("APRES DATASOURCE !!");
 		} catch (NamingException e) {
 			e.printStackTrace();

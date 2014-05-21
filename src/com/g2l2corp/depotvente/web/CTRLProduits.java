@@ -53,8 +53,9 @@ public class CTRLProduits extends HttpServlet {
 				produitsEnVente = daoProduit.produitsEnVente();
 			} catch (DAOException e) {
 				e.printStackTrace();
+				System.out.println("aucun produit en vente trouvé");
 			}
-			
+			System.out.println(" produit en vente trouvé");
 			request.setAttribute("produitsEnVente", produitsEnVente);
 			RequestDispatcher rd = request.getRequestDispatcher("produitsenvente.jsp");
 			rd.forward(request, response);
@@ -67,10 +68,26 @@ public class CTRLProduits extends HttpServlet {
 				listeProduits = daoProduit.listeProduits();
 			} catch (DAOException e) {
 				e.printStackTrace();
+				System.out.println("aucun produit  trouvé");
 			}
 			
 			request.setAttribute("listeProduits", listeProduits);
 			RequestDispatcher rd = request.getRequestDispatcher("listeproduits.jsp");
+			rd.forward(request, response);
+			return;
+		}
+		/* On a selectionné l'onglet "modifier supprimer produit" */
+		if ((action != null) && (action.equals("modifsupproduit"))) {
+			try {
+				listeProduits = daoProduit.listeProduits();
+			} catch (DAOException e) {
+				e.printStackTrace();
+				System.out.println("aucun produit trouvé");
+			}
+			
+			request.setAttribute("listeProduits", listeProduits);
+			RequestDispatcher rd = request.getRequestDispatcher("modifsupproduits.jsp");
+			
 			rd.forward(request, response);
 			return;
 		}
