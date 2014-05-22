@@ -64,7 +64,7 @@ public class CTRLChargerProduits extends HttpServlet {
 		
 		if ((action != null) && (action.equals("OK"))) {
 			// le bouton submit "Valider" a été cliqué. On recupère les valeurs entrées.
-			String fichierProduits = request.getParameter("ficherProduits");
+			String fichierProduits = request.getParameter("fichierProduits");
 			System.out.println("LE FICHER TELECHARGER EST: "+fichierProduits);
 			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
 			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
@@ -75,16 +75,16 @@ public class CTRLChargerProduits extends HttpServlet {
 			try {
 				System.out.println("111111111111111111111111111111111111111111");
 				System.out.println(fichierProduits);
-				produits = daoProduit.chargerProduit(fichierProduits);
+				produits = daoProduit.chargerProduit("C:/Users/BEN/Documents/CQP/STAGE2014-01/SWSandro/Docs/FicherProduit01.csv");
 				System.out.println("222222222222222222222222222222222222222222");
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
-			
+			/*
 			if (produits.isEmpty()) {
 				erreurs_chargerfichier.put("nom", "Aucun fichier n'a été chargé. Merci de verifier votre fichier.");
 			}
-			
+			*/
 			/* Si pas d'erreur lors du chargement des produits */
 			if (erreurs_chargerfichier.isEmpty()) {
 				rd = request.getRequestDispatcher("chargerproduitsvalide.jsp");

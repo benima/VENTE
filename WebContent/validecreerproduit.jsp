@@ -45,31 +45,19 @@
 			</li>
 		</ul> <!-- Fin de la class nav (navigation)  -->
 		<br />
-		<form name="creerproduit" method="post" action="CTRLProduits" >
-			<fieldset>
-			    <legend><h2>Création d'un produit</h2></legend>			    
-			    <p>Le nom du produit*: <input type="text" name="creerproduit_nom" required /></p>
-				<p>Quantité*: <input type="number" step="1" value="1" min="1" max="5000" name="creerproduit_quantite" required /></p>
-				<p>Prix (unitaire)*: <input type="number" step="0.01" min="0.00" max="50000" name="creerproduit_prix" required /></p>
-				<p>
-					Mettre en vente:<br />
-					<label>Oui: <input type="radio" value="oui" name="creerproduit_enVente" checked /> </label>
-					<label>Non: <input type="radio" value="non" name="creerproduit_enVente" /></label>
-				</p>
-				<!-- Choix du fournisseur -->
-				<label>Choisir un fournisseur:</label><br>
-				<select name="creerproduit_fournisseur">
-					<c:forEach items="${fournisseurs}" var="fournisseur">
-						<option value="${fournisseur.getId()}" >${fournisseur.getNom()}</option>
-					</c:forEach>
-				</select>
-				<!-- Ajout d'un commentaire -->				
-			    <p>Entrer des informations complémentaires (optionnelles):<br />
-			    <textarea name="creerproduit_commentaire" rows="5" cols="50" ></textarea></p>
-			    <p>* Les champs obligatoires. </p>
-			    <input type="submit" value="Creer" name="action"/>
-			</fieldset>
-		</form>
+		<fieldset>
+			    <legend><h2>Validation de la création d'un produit</h2></legend>			    
+			    <p></p>
+				<p>Le Produit suivant:</p>
+				<p>Nom: ${creerproduit_nom}</p>
+				<p>Prix: ${creerproduit_prix} &euro;</p>
+				<p>Quantité: ${creerproduit_quantite}</p>
+				<p>Fournisseur ID: ${creerproduit_fournisseur}</p><br />
+				<p> 
+					A été créé avec succès. Pour plus de details, merci de consulter la liste<br />
+					des produits dans l'onglet: Produits > Les Produits. 
+				</p>				
+		</fieldset>
 	</div>
 	
 </body>

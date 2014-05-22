@@ -96,7 +96,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 		/* Test de connexion en base de données: */
 		try (Connection cx = ds.getConnection()){
 			/* La requette à lancer en base de données */
-			PreparedStatement statement = cx.prepareStatement("SELECT * FROM produits");
+			PreparedStatement statement = cx.prepareStatement("SELECT * FROM produits ORDER BY fournisseur");
 			rs = statement.executeQuery();
 			while (rs.next()){
 				int id = rs.getInt("id");
@@ -630,7 +630,30 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			e.printStackTrace();
 		}
 		
-	} // Fin Methode create.
+	} // Fin Methode create avec Produit en paramètre.
+	
+	
+	/* Methode create: on a en paramètre:
+	 *    > nom du produit, 
+	 *    > id fournisseur) */
+	public void create (String nom, int quantite, double prix, String enVente, int idFournisseur, String commentaire) {
+		/* Initialisation des variables */
+		//ResultSet rs;
+		try (Connection cx = ds.getConnection()){
+			PreparedStatement statement; 
+			statement = cx.prepareStatement("INSERT INTO produits (nom, prix, quantite, fournisseur, enVente, commentaire) VALUES (?,?,?,?,?,?)");
+			statement.setString(1,nom);
+			statement.setDouble(2,prix);
+			statement.setInt(3,quantite);
+			statement.setInt(4,idFournisseur);
+			statement.setString(5,enVente);
+			statement.setString(6,commentaire);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	} // Fin create().
 	
 	
 	public void createFournisseur(Fournisseur fournisseur) throws SQLException, Exception {

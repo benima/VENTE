@@ -20,6 +20,7 @@
 					<li><a href="CTRLProduits?action=produitsenvente">Produits en vente</a></li>
 					<li><a href="chargerproduits.jsp">Charger Produits</a></li>
 					<li><a href="#">Modifier Produit</a></li>
+					<li><a href="CTRLProduits?action=creerproduit">Creer Produit</a></li>
 					<li><a href="CTRLEtiquette?action=creeretiquette">Etiquettes des produits</a></li>
 				</ul>
 			</li>
