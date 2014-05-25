@@ -166,6 +166,8 @@ public class ProduitDAOMySQL implements ProduitDAO {
 		
 	} // Fin findFournisseur.
 
+	
+	// Fin Fournisseur by Id:
 	@SuppressWarnings("finally")
 	public Fournisseur findFournisseurById(int id) throws SQLException {
 		Fournisseur fournisseur = null;
@@ -255,19 +257,14 @@ public class ProduitDAOMySQL implements ProduitDAO {
 	
 	// Methode de chargement de produit via un fichier
 	public Collection<Produit> chargerProduit(String fichier) throws DAOException {
-		System.out.println("LE NOM DU FICHIER: "+fichier+"\n #############################################");
-		System.out.println("DEBUT  CHARGER PRODUIT !!!!!!!!");
-		System.out.println("########################################################");
 		// Initialisation de la connexion
 		Connection connexion = null;
 		
 		// Definition de la liste des produits resultante:
 		List<Produit> listProduits = new ArrayList<>();
 		try {
-			System.out.println("DANS TRY DE CHARGER PRODUIT !! \n #############################################");
 			//FileReader fic= new FileReader("C:/Users/BEN/Documents/CQP/STAGE2014-01/SWSandro/Docs/FicherProduit.csv");
 			FileReader fic= new FileReader(fichier);
-			System.out.println("FIN OUVERTURE EN LECTURE DU FICHIER !! \n #############################################");
 			BufferedReader br = new BufferedReader (fic);
 			String line=null;
 			String [] donnees;
@@ -277,7 +274,6 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			
 			Class.forName(NOM_DRIVER); // driver MySQL
 			// Connexion à la base de données:
-			System.out.println("connexion = DriverManager.getConnection(url, user, password);");
 			connexion = DriverManager.getConnection(url, user, password);
 			// Preparation de l'objet qui gère la requête:
 			Statement statement = connexion.createStatement();

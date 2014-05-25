@@ -1,5 +1,7 @@
 package com.g2l2corp.depotvente.web;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -51,7 +53,7 @@ public class CTRLChargerProduits extends HttpServlet {
 		// Liste des erreurs:
 		HashMap<String, String> erreurs_chargerfichier = new HashMap<>();
 		
-		Collection<Produit> produits = null;
+		Collection<Produit> produits_charges = null;
 		
 		// On a selectionné le fichier contenant les produits:
 		String action = request.getParameter("action");
@@ -62,39 +64,54 @@ public class CTRLChargerProduits extends HttpServlet {
 		
 		System.out.println("ACTION = "+action+"\n *************************");
 		
-		if ((action != null) && (action.equals("OK"))) {
+		if ((action != null) && (action.equals("Charger"))) {
 			// le bouton submit "Valider" a été cliqué. On recupère les valeurs entrées.
 			String fichierProduits = request.getParameter("fichierProduits");
-			System.out.println("LE FICHER TELECHARGER EST: "+fichierProduits);
-			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
-			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
-			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
-			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
-			System.out.println("00000000000000000000   000000000000000000   0000000000000000000000");
 			/* On lance le chargement des produits */
+			
+			String fichier = fichierProduits.replaceAll("[^\\d\\p{L}!#$€%&'`(),;/@...]", "/");
+			fichier = fichier.replace("//", "://");
+			
+			/*Identification du type d'erreur: fichier introuvable. */
 			try {
-				System.out.println("111111111111111111111111111111111111111111");
-				System.out.println(fichierProduits);
-				produits = daoProduit.chargerProduit("C:/Users/BEN/Documents/CQP/STAGE2014-01/SWSandro/Docs/FicherProduit01.csv");
-				System.out.println("222222222222222222222222222222222222222222");
+				FileReader fic= new FileReader(fichier);
+			}catch(FileNotFoundException e) {
+				e.printStackTrace();
+				erreurs_chargerfichier.put("error", "Le fichier est introuvable. Merci de verifier le nom du fichier.");
+				request.setAttribute("erreurs_chargerfichier", erreurs_chargerfichier);
+				rd = request.getRequestDispatcher("chargerproduits.jsp");
+				rd.forward(request, response);
+				return;
+			}
+	
+			/* Chargement des produits dans le fichier en question: */
+			try {
+				produits_charges = daoProduit.chargerProduit(fichierProduits);
 			} catch (DAOException e) {
 				e.printStackTrace();
+				erreurs_chargerfichier.put("error", "Un problème lors du chargement. Merci de verifier le format du fichier.");
+				request.setAttribute("erreurs_chargerfichier", erreurs_chargerfichier);
+				rd = request.getRequestDispatcher("chargerproduits.jsp");
+				rd.forward(request, response);
+				return;
 			}
-			/*
-			if (produits.isEmpty()) {
-				erreurs_chargerfichier.put("nom", "Aucun fichier n'a été chargé. Merci de verifier votre fichier.");
+
+			if (produits_charges.isEmpty()) {
+				erreurs_chargerfichier.put("error", "Le fichier est vide, il ne contient aucun fichier !!");
 			}
-			*/
+			
 			/* Si pas d'erreur lors du chargement des produits */
 			if (erreurs_chargerfichier.isEmpty()) {
-				rd = request.getRequestDispatcher("chargerproduitsvalide.jsp");
+				request.setAttribute("produits_charges", produits_charges);
+				rd = request.getRequestDispatcher("validechargerproduits.jsp");
 			} else { /* Si erreur de chargement des produits */
 				request.setAttribute("erreurs_chargerfichier", erreurs_chargerfichier);
 				rd = request.getRequestDispatcher("chargerproduits.jsp");
 			}
+			
 			rd.forward(request, response);
 			return;
-		} /* Fin If. */
+		} /* Fin If ==> Charger Produits. */
 		
 	} /* Fin doPost. */
 

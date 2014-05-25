@@ -44,30 +44,11 @@
 			</li>
 		</ul> <!-- Fin de la class nav (navigation)  -->
 		<br />
-		<form name="chargerproduits" method="post" action="CTRLChargerProduits" >
-			<fieldset>
-			    <legend><h3>Entrer le chemin complet du fichier contenant des produits au bon format</h3></legend>
-			    <p>
-			    	Le nom de votre fichier*: <input type="text" name="fichierProduits" size="100" placeholder="Entrez le chemin complet du fichier svp." required />
-			    	<label style="color:red">${erreurs_chargerfichier.get("error")}</label><br />
-			    </p>
-			    <p><h4>Recommandations:</h4></p>
-			    <p style="background-color:#85C630">
-			    	<br />Exemple du nom de fichier: <code>G2L2Produits.csv</code><br />
-			    	Le nom complet du chemin de votre fichier ne doit pas contenir d'espace(s) ou des caractères spéciaux:
-			    	<br /><code>! § , ; & é ~ < " > # ' { ( ) [ ] - | è ` _ / ç ^ à @ = + ù % ê ^ £ $ ¤ </code><br />
-			    	Ce fichier <code>csv</code> doit être sous la forme: <br />
-			    	<code>Nom Complet du fournisseur;Nom du produit;Quantité;Prix</code><br />
-			    	Exemple de ligne: <br /><code>Dupont Durand;produit 1;5;30</code><br />
-			    	Exemple de chemin complet d'un fichier produit: 
-			    	<br /><code>C:\Users\BEN\Documents\CQP\STAGE2014\Datas\G2L2Produits31052014.csv</code><br />
-			    	<br />Merci d'avance de respecter cette procédure.<br />
-			    	<br />Bien Cordialement,<br />
-			    	<br />Equipe G2L2 Corp.<br />. 
-			    </p><br />
-			    <p><input type="reset" value="Effacer" name="action" /> <input type="submit" value="Charger" name="action" /></p><br />
-			</fieldset>
-		</form>
+		<fieldset>
+			<legend><h3>Chargement des produits valide !!</h3></legend><br />
+			<p style="margin-left: 40px">Le chargement des produits a été effectué avec succès. </p>
+			<p style="margin-left: 40px">Nombre de produit(s) chargé(s): <h2 style="margin-left: 270px; color:white" >${produits_charges.size()} </h2></p>
+		</fieldset>
 	</div>
 	
 </body>
