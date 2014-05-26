@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
 		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/style02.css">
 		<title>G2L2Corp: Depôt Vente</title>
 	</head>
 <body>
@@ -45,46 +44,23 @@
 				</ul>
 			</li>
 		</ul> <!-- Fin de la class nav (navigation)  -->
-		<p>
-			<table class="pv-table">
-				<caption class="leTitre"><h2>La liste de tous les Produits</h2></caption>
-				<thead class="ttable"> <!-- En-tête du tableau -->
-			       <tr>
-			           <th>ID Produit</th>
-			           <th>ID Fni</th>
-			           <th>Nom Prdt</th>
-			           <th>Prix</th>
-			           <th>Qnt</th>
-			           <th>Qnt Vendue</th>
-			           <th>Commentaire</th>
-			       </tr>
-			   </thead>
-			   <tfoot class="ttable"> <!-- Pied de tableau -->
-			       <tr>
-			           <th>ID Produit</th>
-			           <th>ID Fni</th>
-			           <th>Nom Prdt</th>
-			           <th>Prix</th>
-			           <th>Qnt</th>
-			           <th>Qnt Vendue</th>
-			           <th>Commentaire</th>
-			       </tr>
-			   </tfoot>
-			   <tbody> <!-- Corps du tableau -->
-			   <c:forEach items="${listeProduits}" var="produit">
-				 <tr>
-				 	 <td>${produit.getId()}</td>
-				     <td>${produit.getProprietaire().getId()}</td>
-				     <td>${produit.getNomProduit()}</td>
-				     <td>${produit.getPrixUnitaire()} &euro;</td>
-				     <td>${produit.getQuantiteProduit()}</td>
-				     <td>${produit.getQuantiteVendue()}</td>
-				     <td>${produit.getCommentaire()}</td>
-				</tr>
-				</c:forEach>
-			  </tbody>	
-		  </table>
-	  </p>
+		<br />
+		<form name="creerfournisseur" method="post" action="CTRLFournisseur" >
+			<fieldset>
+			    <legend><h3>Création d'un Fournisseur</h3></legend>
+			    <p style="color: red; margin-left: 20px">${erreurs_creerfournisseur.get("error")}</p>			    
+			    <p>Nom Complet du Fournisseur*: <input type="text" size="50" name="creerfournisseur_nom" required placeholder="Exemple: Jean-Pierre DUPONT"/></p>
+				<p>Adresse*: <input type="text" size="50" name="creerfournisseur_adresse" required placeholder="Exemple: 5, rue Dubois, 69001 LYON"/></p>
+				<p>Telephone*: <input type="tel" size="30" name="creerfournisseur_telephone" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" placeholder="Exemple: 0612345678" required /></p>
+				<p>Email du Fournisseur*: <input type="email" size="50" name="creerfournisseur_email" placeholder="Exemple: rolland.dupont@gmail.com" required /></p>
+				<!-- Ajout d'un commentaire -->				
+			    <p>Entrer des informations complémentaires (optionnelles):<br />
+			    <textarea name="creerfournisseur_commentaire" rows="5" cols="50" ></textarea></p>
+			    <p>* Les champs obligatoires. </p>
+			    <p><input style="margin-left: 100px" type="reset" value="Effacer" name="action" /> <input style="margin-left: 500px" type="submit" value="Creer" name="action"/></p>
+			</fieldset>
+		</form>
 	</div>
+	
 </body>
 </html>

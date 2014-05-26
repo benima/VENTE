@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
 		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/style02.css">
 		<title>G2L2Corp: Depôt Vente</title>
 	</head>
 <body>
@@ -45,46 +43,19 @@
 				</ul>
 			</li>
 		</ul> <!-- Fin de la class nav (navigation)  -->
-		<p>
-			<table class="pv-table">
-				<caption class="leTitre"><h2>La liste de tous les Produits</h2></caption>
-				<thead class="ttable"> <!-- En-tête du tableau -->
-			       <tr>
-			           <th>ID Produit</th>
-			           <th>ID Fni</th>
-			           <th>Nom Prdt</th>
-			           <th>Prix</th>
-			           <th>Qnt</th>
-			           <th>Qnt Vendue</th>
-			           <th>Commentaire</th>
-			       </tr>
-			   </thead>
-			   <tfoot class="ttable"> <!-- Pied de tableau -->
-			       <tr>
-			           <th>ID Produit</th>
-			           <th>ID Fni</th>
-			           <th>Nom Prdt</th>
-			           <th>Prix</th>
-			           <th>Qnt</th>
-			           <th>Qnt Vendue</th>
-			           <th>Commentaire</th>
-			       </tr>
-			   </tfoot>
-			   <tbody> <!-- Corps du tableau -->
-			   <c:forEach items="${listeProduits}" var="produit">
-				 <tr>
-				 	 <td>${produit.getId()}</td>
-				     <td>${produit.getProprietaire().getId()}</td>
-				     <td>${produit.getNomProduit()}</td>
-				     <td>${produit.getPrixUnitaire()} &euro;</td>
-				     <td>${produit.getQuantiteProduit()}</td>
-				     <td>${produit.getQuantiteVendue()}</td>
-				     <td>${produit.getCommentaire()}</td>
-				</tr>
-				</c:forEach>
-			  </tbody>	
-		  </table>
-	  </p>
+		<br />
+		<fieldset>
+			<legend><h3>Création d'un nouveau Fournisseur valide !!</h3></legend><br />
+			<p style="margin-left: 40px">La création d'un nouveau Fournisseur a été effectué avec succès. </p>
+			<p style="margin-left: 40px">Les informations du fournisseur créé:</p>
+			<p style="margin-left: 200px; color: white">ID: ${creerfournisseur_fournisseur.getId()}</p>
+			<p style="margin-left: 200px; color: white">Nom Complet: ${creerfournisseur_fournisseur.getNom()}</p>
+			<p style="margin-left: 200px; color: white">Adresse: ${creerfournisseur_fournisseur.getAdresse()}</p>
+			<p style="margin-left: 200px; color: white">Telephone: ${creerfournisseur_fournisseur.getTelephone()}</p>
+			<p style="margin-left: 200px; color: white">Email: ${creerfournisseur_fournisseur.getEmail()}</p>
+			<p style="margin-left: 40px">La création d'un nouveau Fournisseur est terminée. </p>
+		</fieldset>
 	</div>
+	
 </body>
 </html>

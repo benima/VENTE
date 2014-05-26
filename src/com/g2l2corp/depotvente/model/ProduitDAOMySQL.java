@@ -210,6 +210,37 @@ public class ProduitDAOMySQL implements ProduitDAO {
 	} /* Fin findFournisseurById. */
 	
 	
+	/* Methode: findFournisseurByName() */
+	public Fournisseur findFournisseurByName(String nom) throws SQLException, DAOException { 
+		
+		/* Initialisation des variables: */
+		Fournisseur fournisseur = null;
+		ResultSet rs;
+		
+		/* Test de connexion en base de données: */
+		try (Connection cx = ds.getConnection()){
+			/* La requette à lancer en base de données */
+			PreparedStatement statement = cx.prepareStatement("SELECT * FROM fournisseurs WHERE nom=?");
+			statement.setString(1, nom);
+			rs = statement.executeQuery();
+			if (rs.next()){
+				int id = rs.getInt("id");
+				String adresse = rs.getString("adresse");
+				String telephone = rs.getString("telephone");
+				String email = rs.getString("email");
+				String commentaire = rs.getString("commentaire");
+				
+				/* Le fournisseur correspondant */
+				fournisseur = new Fournisseur(nom, adresse, telephone, email);
+			} /* Fin if. */
+		} catch(SQLException ex){
+			ex.printStackTrace();
+			throw new DAOException(ex.getMessage(),ex);
+		}
+		return fournisseur;
+	} // Fin findFournisseurByName.
+	
+
 	// Methode pour savoir si un fournisseur existe déjà en base de donnees:
 	@SuppressWarnings("finally")
 	public boolean existeFournisseur(Fournisseur fournisseur) throws SQLException {
@@ -681,7 +712,40 @@ public class ProduitDAOMySQL implements ProduitDAO {
 	
 	} // Fin methode createFournisseur.
 	
+	// ******************************************************************
+	/* Methode de création d'un fournisseur en base de donnée: */
+	public void createFournisseur(String nom, String adresse, String telephone, String email, String commentaire) throws SQLException, DAOException {
+		/* Verification si le fournisseur existe dans la base de données */
+		Fournisseur fournisseur = this.findFournisseurByName(nom);
+		/* On ne crée le fournisseur que s'il n'existe pas en base de données: */
+		if (fournisseur == null) {
+			/* Test de connexion en base de données: */
+			try (Connection cx = ds.getConnection()) {
+				/* La requette de création de fournisseur en base de données: */
+				PreparedStatement statement = cx.prepareStatement("INSERT INTO fournisseurs (nom, adresse, telephone, email, commentaire) VALUES (?,?,?,?,?)");
+				statement.setString(1,nom);
+				statement.setString(2,adresse);
+				statement.setString(3,telephone);
+				statement.setString(4,email);
+				statement.setString(5,commentaire);
+				
+				statement.executeUpdate();
+				
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+				throw new DAOException(ex.getMessage(), ex);
+			}
+		} /* Fin if. */
+	
+	} // Fin methode createFournisseur.
 
+	// ***************************************************************************
+	
+	
+	
+	
+	
+	
 	@Override
 	public void delete(Produit produit) throws DAOException, Exception {
 		Connection connexion = null;
