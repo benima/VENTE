@@ -7,12 +7,12 @@
 <body>
 
  <p>
-<form  method="post" action="CTRLSupModifProduits" >
+<form  method="post" action="CTRLCreerFournisseur" >
 			<fieldset>
-			    <legend><h2>Rechercher le produit à supprimer ou modifier</h2></legend>
+			    <legend><h2>Rechercher le fournisseur à supprimer ou modifier</h2></legend>
 			    <p>
-			    	L'id du produit: <input type="text" name="idproduit" required />
-			    	<label style="color:red">${erreurs_idproduit.get("id")}</label><br />
+			    	L'id du fournisseur: <input type="text" name="idfournisseur" required />
+			    	
 			    </p>
 			   
 			    <div><p><input name="action" value="Supprimer" id="Supprimer" type="submit" /> </div><div>  <input name="action" value="Modifier" id="Modifier" type="submit" /> </div></p><br />

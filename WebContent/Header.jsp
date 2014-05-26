@@ -25,11 +25,11 @@
     <!-- url -->
     <c:url var="urlid" value="/menuAccueil" />
     <c:url var="urllist" value="/menuAccueil" />
-    <c:url var="accueilURL" value="/depotvente/"/>
+    <c:url var="accueilURL" value="index.jsp"/>
 	<c:url var="retouraccueilURL" value="/menuAccueil.jsp"/>
 	<c:url var="accueilURL" value="/depotvente/"/>
 	<c:url var="listeproduit" value="/menuAccueil?action=produit"/>
-	<c:url var="retouraccueilURL" value="/menuAccueil.jsp"/>
+	<c:url var="retouraccueilURL" value="/index.jsp"/>
 	<c:url var="retourlisteProduits" value="/listeProduits.jsp"/>
 	<c:url var="retourfournisseurURL" value="/menuAccueil.jsp"/>
 	<c:url var="listefournisseur" value="/menuAccueil?action=fournisseur"/>
@@ -71,11 +71,12 @@
 				<a href="#">Administration</a>
 				<ul class="dropdown">
 					<li><a href="#">Les Fournisseurs</a></li>
-					<li><a href="#">Creer un Fournisseur</a></li>
+					<li><a href="CTRLCreerFournisseur?action=creerfournisseur">Creer un Fournisseur</a></li>
+					<li><a href="CTRLCreerFournisseur?action=supmodfournisseur">Modifier Supprimer Fournisseur</a></li>
 					<li><a href="#">Les utilisateurs</a></li>
 					<li><a href="#">Creer un utilisateur</a></li>
 				</ul>
 			</li>
 		</ul> <!-- Fin de la class nav (navigation)  -->
-	</div> 
+	
   
