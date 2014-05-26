@@ -1,7 +1,7 @@
 package com.g2l2corp.depotvente.model;
 
 public class Vente {
-    
+
 	// Les attributs:
 	private String id;
 	private Produit produit;

@@ -20,7 +20,6 @@
 					<li><a href="CTRLProduits?action=produitsenvente">Produits en vente</a></li>
 					<li><a href="chargerproduits.jsp">Charger Produits</a></li>
 					<li><a href="#">Modifier Produit</a></li>
-					<li><a href="CTRLProduits?action=creerproduit">Creer Produit</a></li>
 					<li><a href="CTRLEtiquette?action=creeretiquette">Etiquettes des produits</a></li>
 				</ul>
 			</li>
@@ -38,7 +37,7 @@
 			<li>
 				<a href="#">Administration</a>
 				<ul class="dropdown">
-					<li><a href="CTRLFournisseur?action=listefournisseurs">Les Fournisseurs</a></li>
+					<li><a href="#">Les Fournisseurs</a></li>
 					<li><a href="#">Creer un Fournisseur</a></li>
 					<li><a href="#">Les utilisateurs</a></li>
 					<li><a href="#">Creer un utilisateur</a></li>
@@ -47,33 +46,39 @@
 		</ul> <!-- Fin de la class nav (navigation)  -->
 		<p>
 			<table class="pv-table">
-				<caption class="leTitre"><h2>La liste de tous les Fournisseurs</h2></caption>
+				<caption class="leTitre"><h2>La liste de tous les Produits</h2></caption>
 				<thead class="ttable"> <!-- En-tête du tableau -->
 			       <tr>
+			           <th>ID Produit</th>
 			           <th>ID Fni</th>
-			           <th>Nom Fournisseur</th>
-			           <th>Adresse Postale</th>
-			           <th>Adresse Mail</th>
-			           <th>Telephone</th>
+			           <th>Nom Prdt</th>
+			           <th>Prix</th>
+			           <th>Qnt</th>
+			           <th>Qnt Vendue</th>
+			           <th>Commentaire</th>
 			       </tr>
 			   </thead>
 			   <tfoot class="ttable"> <!-- Pied de tableau -->
 			       <tr>
+			           <th>ID Produit</th>
 			           <th>ID Fni</th>
-			           <th>Nom Fournisseur</th>
-			           <th>Adresse Postale</th>
-			           <th>Adresse Mail</th>
-			           <th>Telephone</th>
+			           <th>Nom Prdt</th>
+			           <th>Prix</th>
+			           <th>Qnt</th>
+			           <th>Qnt Vendue</th>
+			           <th>Commentaire</th>
 			       </tr>
 			   </tfoot>
 			   <tbody> <!-- Corps du tableau -->
-			   <c:forEach items="${listeFournisseurs}" var="fournisseur">
+			   <c:forEach items="${listeProduits}" var="produit">
 				 <tr>
-				 	 <td>${fournisseur.getId()}</td>
-				     <td>${fournisseur.getNom()}</td>
-				     <td>${fournisseur.getAdresse()}</td>
-				     <td>${fournisseur.getEmail()}</td>
-				     <td>${fournisseur.getTelephone()}</td>
+				 	 <td>${produit.getId()}</td>
+				     <td>${produit.getProprietaire().getId()}</td>
+				     <td>${produit.getNomProduit()}</td>
+				     <td>${produit.getPrixUnitaire()} &euro;</td>
+				     <td>${produit.getQuantiteProduit()}</td>
+				     <td>${produit.getQuantiteVendue()}</td>
+				     <td>${produit.getCommentaire()}</td>
 				</tr>
 				</c:forEach>
 			  </tbody>	

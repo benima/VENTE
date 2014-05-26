@@ -26,7 +26,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 	private static final String NOM_DRIVER="com.mysql.jdbc.Driver";
 	private static final String url = "jdbc:mysql://localhost:3306/sigdv";
 	private static final String user = "root";
-	private static final String password = "manager";
+	private static final String password = "admin";
 	
 	private DataSource ds;
 
@@ -36,11 +36,16 @@ public class ProduitDAOMySQL implements ProduitDAO {
 		try {
 			// créer un contexte dans l'annuaire
 			ic = new InitialContext(); 
+			System.out.println("IC"+ic);
+			System.out.println("AVANT DATASOURCE !!");
+			//ds = (DataSource)ic.lookup("jdbc/sigdv");
 			ds = (DataSource)ic.lookup("jdbc/sigdv");
+			System.out.println("datasource "+ds);
+			System.out.println("APRES DATASOURCE !!");
 		} catch (NamingException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
-		}
+		}		
 	} // Constructeur.
 	
 	// Rechercher tous les produits en vente:
@@ -96,7 +101,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 		/* Test de connexion en base de données: */
 		try (Connection cx = ds.getConnection()){
 			/* La requette à lancer en base de données */
-			PreparedStatement statement = cx.prepareStatement("SELECT * FROM produits ORDER BY fournisseur");
+			PreparedStatement statement = cx.prepareStatement("SELECT * FROM produits");
 			rs = statement.executeQuery();
 			while (rs.next()){
 				int id = rs.getInt("id");
@@ -288,6 +293,10 @@ public class ProduitDAOMySQL implements ProduitDAO {
 	
 	// Methode de chargement de produit via un fichier
 	public Collection<Produit> chargerProduit(String fichier) throws DAOException {
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 8a41026073c655637d0cdad544b72608a484d5b2
 		// Initialisation de la connexion
 		Connection connexion = null;
 		
@@ -308,7 +317,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			connexion = DriverManager.getConnection(url, user, password);
 			// Preparation de l'objet qui gère la requête:
 			Statement statement = connexion.createStatement();
-						
+			
 			// Lecture du fichier ligne par ligne:
 			while ((line=br.readLine()) != null) {
 				//System.out.println(line);
@@ -657,30 +666,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			e.printStackTrace();
 		}
 		
-	} // Fin Methode create avec Produit en paramètre.
-	
-	
-	/* Methode create: on a en paramètre:
-	 *    > nom du produit, 
-	 *    > id fournisseur) */
-	public void create (String nom, int quantite, double prix, String enVente, int idFournisseur, String commentaire) {
-		/* Initialisation des variables */
-		//ResultSet rs;
-		try (Connection cx = ds.getConnection()){
-			PreparedStatement statement; 
-			statement = cx.prepareStatement("INSERT INTO produits (nom, prix, quantite, fournisseur, enVente, commentaire) VALUES (?,?,?,?,?,?)");
-			statement.setString(1,nom);
-			statement.setDouble(2,prix);
-			statement.setInt(3,quantite);
-			statement.setInt(4,idFournisseur);
-			statement.setString(5,enVente);
-			statement.setString(6,commentaire);
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	} // Fin create().
+	} // Fin Methode create.
 	
 	
 	public void createFournisseur(Fournisseur fournisseur) throws SQLException, Exception {

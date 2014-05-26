@@ -46,11 +46,14 @@ public class CTRLEtiquette extends HttpServlet {
 		// On a selectionné l'onglet "Etiquettes des produits" pour imprimer les etiquettes:
 		
 		if (action.equals("creeretiquette")) {
+			System.out.println("1111111111111111111111111111111111111111111111111");
 			try {
 				listeEtiquettes = (List<Etiquette>) daoEtiquette.creerEtiquette();
+				System.out.println("2222222222222222222222222222222222222222222222");
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
+			System.out.println("3333333333333333333333333333333333333333");
 			request.setAttribute("listeEtiquettes", listeEtiquettes);
 			RequestDispatcher rd = request.getRequestDispatcher("afficheretiquettes.jsp");
 			rd.forward(request, response);

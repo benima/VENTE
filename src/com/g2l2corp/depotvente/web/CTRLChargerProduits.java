@@ -62,11 +62,19 @@ public class CTRLChargerProduits extends HttpServlet {
 		//String fichierProduits = request.getParameter("fichierProduits");
 		//System.out.println("LE FICHER TELECHARGER EST: "+fichierProduits);
 		
+<<<<<<< HEAD
 		System.out.println("ACTION = "+action+"\n *************************");
 		
 		if ((action != null) && (action.equals("Charger"))) {
 			// le bouton submit "Valider" a été cliqué. On recupère les valeurs entrées.
 			String fichierProduits = request.getParameter("fichierProduits");
+=======
+		if ((action != null) && (action.equals("Charger"))) {
+			// le bouton submit "Valider" a été cliqué. On recupère les valeurs entrées.
+			String fichierProduits = request.getParameter("ficherProduits");
+			System.out.println("LE FICHER TELECHARGER EST: "+fichierProduits);
+			
+>>>>>>> 8a41026073c655637d0cdad544b72608a484d5b2
 			/* On lance le chargement des produits */
 			
 			String fichier = fichierProduits.replaceAll("[^\\d\\p{L}!#$€%&'`(),;/@...]", "/");
@@ -74,6 +82,7 @@ public class CTRLChargerProduits extends HttpServlet {
 			
 			/*Identification du type d'erreur: fichier introuvable. */
 			try {
+<<<<<<< HEAD
 				FileReader fic= new FileReader(fichier);
 			}catch(FileNotFoundException e) {
 				e.printStackTrace();
@@ -87,6 +96,11 @@ public class CTRLChargerProduits extends HttpServlet {
 			/* Chargement des produits dans le fichier en question: */
 			try {
 				produits_charges = daoProduit.chargerProduit(fichierProduits);
+=======
+				System.out.println("111111111111111111111111111111111111111111");
+				produits = daoProduit.chargerProduit(fichierProduits);
+				System.out.println("222222222222222222222222222222222222222222");
+>>>>>>> 8a41026073c655637d0cdad544b72608a484d5b2
 			} catch (DAOException e) {
 				e.printStackTrace();
 				erreurs_chargerfichier.put("error", "Un problème lors du chargement. Merci de verifier le format du fichier.");
@@ -95,9 +109,15 @@ public class CTRLChargerProduits extends HttpServlet {
 				rd.forward(request, response);
 				return;
 			}
+<<<<<<< HEAD
 
 			if (produits_charges.isEmpty()) {
 				erreurs_chargerfichier.put("error", "Le fichier est vide, il ne contient aucun fichier !!");
+=======
+			
+			if (produits.isEmpty()) {
+				erreurs_chargerfichier.put("nom", "Aucun fichier n'a été chargé. Merci de verifier votre fichier.");
+>>>>>>> 8a41026073c655637d0cdad544b72608a484d5b2
 			}
 			
 			/* Si pas d'erreur lors du chargement des produits */

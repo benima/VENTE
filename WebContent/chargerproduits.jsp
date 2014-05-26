@@ -18,7 +18,6 @@
 					<li><a href="CTRLProduits?action=produitsenvente">Produits en vente</a></li>
 					<li><a href="chargerproduits.jsp">Charger Produits</a></li>
 					<li><a href="#">Modifier Produit</a></li>
-					<li><a href="CTRLProduits?action=creerproduit">Creer Produit</a></li>
 					<li><a href="CTRLEtiquette?action=creeretiquette">Etiquettes des produits</a></li>
 				</ul>
 			</li>
@@ -36,23 +35,38 @@
 			<li>
 				<a href="#">Administration</a>
 				<ul class="dropdown">
+<<<<<<< HEAD
 					<li><a href="CTRLFournisseur?action=listefournisseurs">Les Fournisseurs</a></li>
 					<li><a href="creerfournisseur.jsp">Creer un Fournisseur</a></li>
+=======
+					<li><a href="#">Les Fournisseurs</a></li>
+					<li><a href="#">Creer un Fournisseur</a></li>
+>>>>>>> 8a41026073c655637d0cdad544b72608a484d5b2
 					<li><a href="#">Les utilisateurs</a></li>
 					<li><a href="#">Creer un utilisateur</a></li>
 				</ul>
 			</li>
 		</ul> <!-- Fin de la class nav (navigation)  -->
+<<<<<<< HEAD
 		<br />
 		<form name="chargerproduits" method="post" action="CTRLChargerProduits" >
+=======
+		<form name="chargerproduits" method="post" action="CTRLChargerProduits" enctype="multipart/form-data">
+>>>>>>> 8a41026073c655637d0cdad544b72608a484d5b2
 			<fieldset>
 			    <legend><h3>Entrer le chemin complet du fichier contenant des produits au bon format</h3></legend>
 			    <p>
+<<<<<<< HEAD
 			    	Le nom de votre fichier*: <input type="text" name="fichierProduits" size="100" placeholder="Entrez le chemin complet du fichier svp." required />
 			    	<label style="color:red">${erreurs_chargerfichier.get("error")}</label><br />
+=======
+			    	Le nom de votre fichier*: <input type="text" name="fichierProduits" required />
+			    	<label style="color:red">${erreurs_chargerfichier.get("nom")}</label><br />
+>>>>>>> 8a41026073c655637d0cdad544b72608a484d5b2
 			    </p>
 			    <p><h4>Recommandations:</h4></p>
 			    <p style="background-color:#85C630">
+<<<<<<< HEAD
 			    	<br />Exemple du nom de fichier: <code>G2L2Produits.csv</code><br />
 			    	Le nom complet du chemin de votre fichier ne doit pas contenir d'espace(s) ou des caractères spéciaux:
 			    	<br /><code>! § , ; & é ~ < " > # ' { ( ) [ ] - | è ` _ / ç ^ à @ = + ù % ê ^ £ $ ¤ </code><br />
@@ -65,6 +79,17 @@
 			    	<br />Bien Cordialement,<br />
 			    	<br />Equipe G2L2 Corp.<br />. 
 			    </p><br />
+=======
+			    	Exemple du nom de fichier: <span>FichierProduits.csv</span><br />
+			    	Votre fichier doit être placé dans le repertoire suivant: <span>../../../</span><br />
+			    	Ce fichier doit être sous la forme: <br />
+			    	<span>Nom Complet du fournisseur;Nom du produit;Quantité;Prix</span><br />
+			    	Exemple de ligne: <span>Dupont Durand;produit1;5;30</span><br />
+			    	Merci d'avance de respecter cette procédure.<br />
+			    	Bien Cordialement,<br />
+			    	Equipe G2L2 Corp.
+			    </p>
+>>>>>>> 8a41026073c655637d0cdad544b72608a484d5b2
 			    <p><input type="reset" value="Effacer" name="action" /> <input type="submit" value="Charger" name="action" /></p><br />
 			</fieldset>
 		</form>
