@@ -52,6 +52,7 @@
 					<li><a href="CTRLProduits?action=listeproduits">Liste Produits</a></li>
 					<li><a href="CTRLProduits?action=produitsenvente">Produits en vente</a></li>
 					<li><a href="chargerproduits.jsp">Charger Produits</a></li>
+					<li><a href="CTRLProduits?action=creerproduit">Creer produit</a></li>
 					<li><a href="modifsupproduits.jsp">Modifier/supprimer Produit</a></li>
 					<li><a href="CTRLEtiquette?action=creeretiquette">Etiquettes des produits</a></li>
 				</ul>
@@ -70,7 +71,7 @@
 			<li>
 				<a href="#">Administration</a>
 				<ul class="dropdown">
-					<li><a href="#">Les Fournisseurs</a></li>
+					<li><a href="CTRLCreerFournisseur?action=listefournisseurs">Les Fournisseurs</a></li>
 					<li><a href="CTRLCreerFournisseur?action=creerfournisseur">Creer un Fournisseur</a></li>
 					<li><a href="CTRLCreerFournisseur?action=supmodfournisseur">Modifier Supprimer Fournisseur</a></li>
 					<li><a href="#">Les utilisateurs</a></li>

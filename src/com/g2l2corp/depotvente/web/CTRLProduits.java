@@ -48,6 +48,12 @@ public class CTRLProduits extends HttpServlet {
 		String action = request.getParameter("action");
 		// On a selectionné l'onglet "Etiquettes des produits" pour imprimer les etiquettes:
 		
+		if ((action != null) && (action.equals("creerproduit"))) {
+		
+			RequestDispatcher rd = request.getRequestDispatcher("creerproduit.jsp");
+			rd.forward(request, response);
+			return;
+		}
 		if ((action != null) && (action.equals("produitsenvente"))) {
 			try {
 				produitsEnVente = daoProduit.produitsEnVente();
@@ -100,6 +106,7 @@ public class CTRLProduits extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 	}
 
 }
