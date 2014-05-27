@@ -16,7 +16,6 @@ import com.g2l2corp.depotvente.model.Fournisseur;
 import com.g2l2corp.depotvente.model.Produit;
 import com.g2l2corp.depotvente.model.ProduitDAOMySQL;
 
-import fr.demos.formation.model.DVD;
 
 /**
  * Servlet implementation class CTRLCreerFournisseur
@@ -24,7 +23,7 @@ import fr.demos.formation.model.DVD;
 @WebServlet("/CTRLCreerFournisseur")
 public class CTRLCreerFournisseur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      private ProduitDAOMySQL fournidao;
+      private ProduitDAOMySQL fournidao = new ProduitDAOMySQL();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -67,10 +66,19 @@ public class CTRLCreerFournisseur extends HttpServlet {
 			Fournisseur fournisseur = new Fournisseur(nom, adresse, tel, mail);
 			try {
 				
-				//fournicreer =fournidao.createFournisseur(fournisseur);
+				fournidao.createFournisseur(fournisseur);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			finally{
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
+			}
 		}
 		if ((action != null) && (action.equals("Modifier"))) {
 			HttpSession session = request.getSession();
