@@ -58,7 +58,7 @@ public class CTRLCreerFournisseur extends HttpServlet {
 			
 		
 		if ((action != null) && (action.equals("Enregistrer"))) {
-			Fournisseur fournicreer=null;
+			
 			String nom = request.getParameter("nomFournisseur");
 			String adresse = request.getParameter("adrfourni");
 			String tel = request.getParameter("telfourni");
