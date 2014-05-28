@@ -9,18 +9,15 @@
      
       <div class="main">
 
-<form action="${accueilURL}" method="post">
-<p> Nom  :<input name="nomFournisseur" type="text" value="${param.nomFournisseur}" />${erreurs["nomFournisseur"]}</p>
-	
+<form action="${creerfourni}" method="post">
+
+<p> Nom  : <input name="nomFournisseur" type="text" value="${param.nomFournisseur}" />${erreurs["nomFournisseur"]}</p>
 	<p>
-	<label>Adresse : </label> <input name="adrfourni" type="text" value="${param.adrfourni}"/>${erreurs["adrfourni"]}</p><br>
-	
+	<label>Adresse : </label> <input name="adrfourni" type="text" value="${param.adrfourni}"/>${erreurs["adrfourni"]}</p>
 	<p>
-	<label>Telephone : </label> <input name="telfourni" type="text" value="${param.telfourni}"/>${erreurs["telfourni"]}</p><br>
-	
+	<label>Telephone : </label> <input name="telfourni" type="text" value="${param.telfourni}"/>${erreurs["telfourni"]}</p>
 	<p>
-	<label>Email : </label> <input name="emailfourni" type="text" value="${param.emailfourni}"/>${erreurs["emailfourni"]}</p><br>
-	
+	<label>Email : </label> <input name="emailfourni" type="text" value="${param.emailfourni}"/>${erreurs["emailfourni"]}</p>
 <input type="submit" class="btn btn-lg btn-success" value="Enregistrer" name="action"/>
 </form>
 </div>

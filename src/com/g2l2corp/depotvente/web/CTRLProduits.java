@@ -84,12 +84,6 @@ public class CTRLProduits extends HttpServlet {
 		}
 		/* On a selectionné l'onglet "modifier supprimer produit" */
 		if ((action != null) && (action.equals("modifsupproduit"))) {
-			try {
-				listeProduits = daoProduit.listeProduits();
-			} catch (DAOException e) {
-				e.printStackTrace();
-				System.out.println("aucun produit trouvé");
-			}
 			
 			request.setAttribute("listeProduits", listeProduits);
 			RequestDispatcher rd = request.getRequestDispatcher("modifsupproduits.jsp");

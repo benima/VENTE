@@ -106,8 +106,7 @@ public class CTRLCreerFournisseur extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-				RequestDispatcher rd = request
-						.getRequestDispatcher("index.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 				rd.forward(request, response);
 			}
 		}

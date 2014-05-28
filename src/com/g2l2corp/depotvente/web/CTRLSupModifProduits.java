@@ -67,11 +67,8 @@ public class CTRLSupModifProduits extends HttpServlet {
 			session.setAttribute("produit",produit);
 			session.setAttribute("type","Modifier");
 			System.out.println("nom produit : "+produit.getNomProduit());
-			request.setAttribute("nomProduit","sacSandrotest");
-			request.setAttribute("fournisseur","Sandrotest");
-			request.setAttribute("prixUnitaire","42");
-			request.setAttribute("quantite","4");
-			request.setAttribute("lot","test");
+			request.setAttribute("produit",produit);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduit.jsp");
 			rd.forward(request, response);
 			return;
@@ -90,21 +87,47 @@ public class CTRLSupModifProduits extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			session.setAttribute("produit",produit);
+			session.setAttribute("idProduit",produit.getNomProduit());
+			session.setAttribute("nomProduit",produit.getNomProduit());
+			session.setAttribute("nomFournisseur",produit.getProprietaire());
+			session.setAttribute("commentaireProduit",produit.getCommentaire());
+			
 			session.setAttribute("type","Supprimer");
-			request.setAttribute("nomProduit",produit.getNomProduit());
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduitproduit.jsp");
 			rd.forward(request, response);
 			return;
 		}
 		// on confirme  la suppression ou la modification
 		if (action != null && action.equals("Confirmer")) {
+			 produit= new Produit(1,action, 23,0, false, 0, null, "f", false);
+			try {
+				
+				 daoProduit.update(produit);
+				 
+			} catch (DAOException e) {
+				e.printStackTrace();
+				request.setAttribute("error","erreur DAO");
+				System.out.println(" erreur DAO aucun produit  trouvé");
+				RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduitproduit.jsp");
+				rd.forward(request, response);
+				return;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("erreur autre : aucun produit  trouvé");
+				RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduitproduit.jsp");
+				rd.forward(request, response);
+				return;
+			}
 			if (session.getAttribute("type").equals("Supprimer")) {
 				
 			}
 			if (session.getAttribute("type").equals("Modifier")) {
 				
 			}
+			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+			rd.forward(request, response);
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduitproduit.jsp");
 		rd.forward(request, response);

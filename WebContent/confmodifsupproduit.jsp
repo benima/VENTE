@@ -7,15 +7,18 @@
       <div class="main">
 
 <form action="CTRLSupModifProduits" method="post">
-<p> Nom  :<input name="nomProduit" required type="text" value="${param.nomProduit}" />${erreurs["nomProduit"]}</p>
-	<p>Fournisseur :<input name="fournisseur" required type="text" value="${param.fournisseur}"/>${erreurs["fournisseur"]}</p>
+
+	<p> id Produit : ${produit.getId()} <p>
+	<p> Nom  :<input name="nomProduit" required type="text" value="${produit.getNomProduit()}" />${erreurs["nomProduit"]}</p>
+	<p>Fournisseur : "${produit.getProprietaire().getNom()}"</p>
 	<p>
-	<label>Prix unitaire : </label> <input name="prixUnitaire" required type="text" value="${param.prixUnitaire}"/>${erreurs["prixUnitaire"]}</p>
-	<label>Quantité : </label> <input name="quantite" required type="text" value="${param.quantite}"/>${erreurs["quantite"]}</p>
-	<label>Lot</label>
-	oui :<input type="radio" name="lot" value="true" title="oui" id="radiobouton"> non :<input type="radio" title="non" name="lot" value="false" id="radiobouton"><br>${erreurs["lot"]} <br>
-	<p>
- <input type="submit" class="btn btn-lg btn-success" value="Confirmer" name="action"/>
+	<label>Prix unitaire : </label> <input name="prixUnitaire" required type="text" value="${produit.getPrixUnitaire()}"/>${erreurs["prixUnitaire"]}</p>
+	<label>Quantité : </label> <input name="quantite" required type="text" value="${produit.getQuantiteProduit()}"/>${erreurs["quantite"]}</p>
+	<label>commentaire : </label> <input name="commentaire" required type="text" value="${produit.getCommentaire()}"/>${erreurs["commentaire"]}</p>
+	
+	
+	
+ <input type="submit" class="btn btn-lg btn-success" value="Confirmer" name="action"/> <bold>${error}</bold>
 </form>
 
 <a href="${retourlisteProduits}" >retour</a>
