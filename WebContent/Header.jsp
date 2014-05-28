@@ -25,6 +25,7 @@
     <!-- url -->
     <c:url var="urlid" value="/menuAccueil" />
     <c:url var="urllist" value="/menuAccueil" />
+     <c:url var="creerfounri" value="CTRLCreerFournisseur" />
     <c:url var="accueilURL" value="index.jsp"/>
 	<c:url var="retouraccueilURL" value="/menuAccueil.jsp"/>
 	<c:url var="accueilURL" value="/depotvente/"/>

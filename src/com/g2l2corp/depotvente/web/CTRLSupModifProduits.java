@@ -66,8 +66,12 @@ public class CTRLSupModifProduits extends HttpServlet {
 			}
 			session.setAttribute("produit",produit);
 			session.setAttribute("type","Modifier");
-			System.out.println("nom produit : "+produit.getId());
-			//request.setAttribute("nomProduit", produit.getNomProduit());
+			System.out.println("nom produit : "+produit.getNomProduit());
+			request.setAttribute("nomProduit","sacSandrotest");
+			request.setAttribute("fournisseur","Sandrotest");
+			request.setAttribute("prixUnitaire","42");
+			request.setAttribute("quantite","4");
+			request.setAttribute("lot","test");
 			RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduit.jsp");
 			rd.forward(request, response);
 			return;

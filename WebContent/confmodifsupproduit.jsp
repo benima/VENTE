@@ -6,12 +6,12 @@
 
       <div class="main">
 
-<form action="${accueilURL}" method="post">
+<form action="CTRLSupModifProduits" method="post">
 <p> Nom  :<input name="nomProduit" required type="text" value="${param.nomProduit}" />${erreurs["nomProduit"]}</p>
 	<p>Fournisseur :<input name="fournisseur" required type="text" value="${param.fournisseur}"/>${erreurs["fournisseur"]}</p>
 	<p>
-	<label>Prix unitaire : </label> <input name="prixUnitaire" required type="text" value="${param.prixUnitaire}"/>${erreurs["prixUnitaire"]}</p><br>
-	<label>Quantité : </label> <input name="quantite" required type="text" value="${param.quantite}"/>${erreurs["quantite"]}</p><br>
+	<label>Prix unitaire : </label> <input name="prixUnitaire" required type="text" value="${param.prixUnitaire}"/>${erreurs["prixUnitaire"]}</p>
+	<label>Quantité : </label> <input name="quantite" required type="text" value="${param.quantite}"/>${erreurs["quantite"]}</p>
 	<label>Lot</label>
 	oui :<input type="radio" name="lot" value="true" title="oui" id="radiobouton"> non :<input type="radio" title="non" name="lot" value="false" id="radiobouton"><br>${erreurs["lot"]} <br>
 	<p>
