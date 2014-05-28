@@ -9,6 +9,8 @@
 <form action="CTRLSupModifProduits" method="post">
 
 	<p> id Produit : ${produit.getId()} <p>
+	
+	
 	<p> Nom  :<input name="nomProduit" required type="text" value="${produit.getNomProduit()}" />${erreurs["nomProduit"]}</p>
 	<p>Fournisseur : "${produit.getProprietaire().getNom()}"</p>
 	<p>
@@ -17,7 +19,8 @@
 	<label>commentaire : </label> <input name="commentaire" required type="text" value="${produit.getCommentaire()}"/>${erreurs["commentaire"]}</p>
 	
 	
-	
+	<p> <input name="idP"  type="text" Hidden=true value="${produit.getId()}" />${erreurs["nomProduit"]}</p>
+	<p> <input name="idF"  type="text" Hidden=true value="${produit.getProprietaire().getId()}" />${erreurs["nomProduit"]}</p>
  <input type="submit" class="btn btn-lg btn-success" value="Confirmer" name="action"/> <bold>${error}</bold>
 </form>
 

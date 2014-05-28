@@ -728,6 +728,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			/* Si le produit existe, le mettre à jour: */
 			if ((produit != null) && (!produit.getNomProduit().equals(""))){
 				/* La requête pour le update: */
+				System.out.println("debut de la mise à jour");
 				statement = connexion.prepareStatement("UPDATE Produits SET nom=?, prix=?, quantite=?, fournisseur=?, lot=?, prixLot=?, enVente=?, commentaire=? WHERE id=?");
 				
 				/* Les champs/valeurs utils pour la mise à jour du produit: */

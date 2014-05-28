@@ -72,6 +72,16 @@ public class Produit {
 		this.commentaire = "";
 		this.enVente = false;
 	}
+	public Produit(String nomProduit, double prixVente,
+			int quantiteProduit, Fournisseur proprietaire,String Comm) {
+		this.idProduit++;
+		this.id = this.idProduit;
+		this.nomProduit = nomProduit;
+		this.prixUnitaire = prixVente;
+		this.quantiteProduit = quantiteProduit;
+		this.proprietaire = proprietaire;
+		this.commentaire =Comm;
+	}
 	
 	public Produit(int id, String nomProduit, double prixVente,
 			int quantiteProduit, Fournisseur proprietaire) {

@@ -1,10 +1,12 @@
 package com.g2l2corp.depotvente.web;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.g2l2corp.depotvente.model.DAOException;
+import com.g2l2corp.depotvente.model.Fournisseur;
 import com.g2l2corp.depotvente.model.Produit;
 import com.g2l2corp.depotvente.model.ProduitDAOMySQL;
 
@@ -64,11 +67,14 @@ public class CTRLSupModifProduits extends HttpServlet {
 				e.printStackTrace();
 				System.out.println("aucun produit ne correspond à l'id");
 			}
-			session.setAttribute("produit",produit);
-			session.setAttribute("type","Modifier");
-			System.out.println("nom produit : "+produit.getNomProduit());
-			request.setAttribute("produit",produit);
+			request.setAttribute("produit", produit);
+			session.setAttribute("idProduit",produit.getNomProduit());
+			session.setAttribute("nomProduit",produit.getNomProduit());
+			session.setAttribute("idFournisseur",produit.getProprietaire().getId());
+			session.setAttribute("nomFournisseur",produit.getProprietaire());
+			session.setAttribute("commentaireProduit",produit.getCommentaire());
 			
+			System.out.println("session idproduit "+session.getAttribute("idProduit"));
 			RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduit.jsp");
 			rd.forward(request, response);
 			return;
@@ -87,36 +93,73 @@ public class CTRLSupModifProduits extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			session.setAttribute("idProduit",produit.getNomProduit());
+			session.setAttribute("idproduit",produit.getNomProduit());
 			session.setAttribute("nomProduit",produit.getNomProduit());
+			session.setAttribute("idfournisseur",produit.getProprietaire().getId());
+		
 			session.setAttribute("nomFournisseur",produit.getProprietaire());
 			session.setAttribute("commentaireProduit",produit.getCommentaire());
 			
 			session.setAttribute("type","Supprimer");
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduitproduit.jsp");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduit.jsp");
 			rd.forward(request, response);
 			return;
 		}
 		// on confirme  la suppression ou la modification
 		if (action != null && action.equals("Confirmer")) {
-			 produit= new Produit(1,action, 23,0, false, 0, null, "f", false);
+			System.out.println(action);
+			String idF=request.getParameter("idF");
+			String Comm= request.getParameter("commentaire");
+			String Puni= request.getParameter("prixUnitaire");
+			String Qu= request.getParameter("quantite");
+			String idP=request.getParameter("idP");
+			System.out.println(" session : "+session);
+			System.out.println("idfournisseur  "+idF);
+			System.out.println("idPropduit  "+idP);
+			
+			int idFournisseur= Integer.parseInt(idF);
+			int idProduit= Integer.parseInt(idP);
+			int Qte=Integer.parseInt(Qu);
+			double prixUnitaire=Integer.parseInt(Puni);
+			
 			try {
+				// recherche du fournisseur associer au produit à modifier
+				System.out.println("phase recherche fournisseur et creation produit");
+				Fournisseur fourni = daoProduit.findFournisseurById(idFournisseur);
+				System.out.println("Nom Fournisseur : "+fourni.getNom());
+				// produit à modifier
+				produit= new Produit("nomproduit",prixUnitaire,Qte,fourni,Comm);
+				System.out.println("produit à modifer : "+produit.getNomProduit());
 				
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				request.setAttribute("error","erreur SQL");
+				System.out.println("erreur SQL : fournisseur non trouvé");
+				RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduit.jsp");
+				rd.forward(request, response);
+				return;
+			}
+			 // lancement de la modification du produit
+			try {
+				System.out.println("phase maj");
 				 daoProduit.update(produit);
 				 
 			} catch (DAOException e) {
 				e.printStackTrace();
 				request.setAttribute("error","erreur DAO");
 				System.out.println(" erreur DAO aucun produit  trouvé");
-				RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduitproduit.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduit.jsp");
 				rd.forward(request, response);
 				return;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("erreur autre : aucun produit  trouvé");
-				RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduitproduit.jsp");
+				request.setAttribute("error","La mise à jour à échoué");
+				System.out.println("erreur autre :  produit  pas mis à jour");
+				RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduit.jsp");
 				rd.forward(request, response);
 				return;
 			}
@@ -129,8 +172,7 @@ public class CTRLSupModifProduits extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 			rd.forward(request, response);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduitproduit.jsp");
-		rd.forward(request, response);
+		
 	}
 
 }
