@@ -67,20 +67,16 @@ public class CTRLSupModifProduits extends HttpServlet {
 				e.printStackTrace();
 				System.out.println("aucun produit ne correspond à l'id");
 			}
+			System.out.println(produit);
 			request.setAttribute("produit", produit);
-			session.setAttribute("idProduit",produit.getNomProduit());
-			session.setAttribute("nomProduit",produit.getNomProduit());
-			session.setAttribute("idFournisseur",produit.getProprietaire().getId());
-			session.setAttribute("nomFournisseur",produit.getProprietaire());
-			session.setAttribute("commentaireProduit",produit.getCommentaire());
-			
-			System.out.println("session idproduit "+session.getAttribute("idProduit"));
+			request.setAttribute("type","mofifier");
 			RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduit.jsp");
 			rd.forward(request, response);
 			return;
 		}
 		// on souhaite supprimer le produit spécifié
 		if (action != null && action.equals("Supprimer")) {
+			
 			String id = request.getParameter("idproduit");
 			System.out.println("dans supprimer");
 			int idProduit=Integer.parseInt(id);
@@ -93,14 +89,10 @@ public class CTRLSupModifProduits extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			session.setAttribute("idproduit",produit.getNomProduit());
-			session.setAttribute("nomProduit",produit.getNomProduit());
-			session.setAttribute("idfournisseur",produit.getProprietaire().getId());
-		
-			session.setAttribute("nomFournisseur",produit.getProprietaire());
-			session.setAttribute("commentaireProduit",produit.getCommentaire());
 			
-			session.setAttribute("type","Supprimer");
+			request.setAttribute("produit", produit);
+			request.setAttribute("type","Supprimer");
+	
 			
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduit.jsp");
@@ -110,6 +102,7 @@ public class CTRLSupModifProduits extends HttpServlet {
 		// on confirme  la suppression ou la modification
 		if (action != null && action.equals("Confirmer")) {
 			System.out.println(action);
+			String type = request.getParameter("type");
 			String idF=request.getParameter("idF");
 			String Comm= request.getParameter("commentaire");
 			String Puni= request.getParameter("prixUnitaire");
@@ -143,6 +136,7 @@ public class CTRLSupModifProduits extends HttpServlet {
 				rd.forward(request, response);
 				return;
 			}
+			if(type.equals("modifier")){
 			 // lancement de la modification du produit
 			try {
 				System.out.println("phase maj");
@@ -168,7 +162,33 @@ public class CTRLSupModifProduits extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 			rd.forward(request, response);
 		}
-		
+			if(type.equals("supprimer")){
+				 // lancement de la modification du produit
+				try {
+					System.out.println("phase supp");
+					 daoProduit.delete(produit);
+					 
+				} catch (DAOException e) {
+					e.printStackTrace();
+					request.setAttribute("error","erreur DAO");
+					System.out.println(" erreur DAO aucun produit  trouvé");
+					RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduit.jsp");
+					rd.forward(request, response);
+					return;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					request.setAttribute("error","La suppression à échoué");
+					System.out.println("erreur autre :  produit  pas supprimer");
+					RequestDispatcher rd = request.getRequestDispatcher("/confmodifsupproduit.jsp");
+					rd.forward(request, response);
+					return;
+				}
+				System.out.println("produit supprimer");
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+				rd.forward(request, response);
+			}
+		}
 	}
 
 }

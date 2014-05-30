@@ -68,7 +68,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 				/* Le fournisseur correspondant */
 				fournisseur = this.findFournisseurById(idFournisseur);
 				
-				double prix = rs.getDouble("prix");
+				int prix = rs.getInt("prix");
 				int quantite = rs.getInt("quantite");
 				int quantiteVendue = rs.getInt("quantiteVendue");
 				String commentaire = rs.getString("commentaire");
@@ -110,7 +110,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 				/* Le fournisseur correspondant */
 				fournisseur = this.findFournisseurById(idFournisseur);
 				
-				double prix = rs.getDouble("prix");
+				int prix = rs.getInt("prix");
 				int quantite = rs.getInt("quantite");
 				int quantiteVendue = rs.getInt("quantiteVendue");
 				String commentaire = rs.getString("commentaire");
@@ -316,7 +316,7 @@ public class ProduitDAOMySQL implements ProduitDAO {
 					String nomProduit = donnees[1];
 					int qteProduit = Integer.parseInt(donnees[2]);
 					// double prixVente = Integer.parseInt(donnees[3]);
-					double prixVente = Integer.parseInt(donnees[3]);
+					int prixVente = Integer.parseInt(donnees[3]);
 					
 					// Insertion d'un produit dans la base de données:
 					String produitSQL = "INSERT INTO Produits (nom, prix, quantite, fournisseur) VALUES ('"+nomProduit+"', '"+
@@ -372,19 +372,22 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			if (rs.next()) {
 				int idProduit = rs.getInt("id");
 				String nomProduit = rs.getString("nom");
-				double prixUnitaire = rs.getDouble("prix");
+				int prixUnitaire = rs.getInt("prix");
+				//double prixUnitaire = rs.getDouble("prix");
 				int quantiteProduit = rs.getInt("quantite");
 				/*boolean lot = rs.getBoolean("lot"); 
 				String commentaire;
 				boolean enVente;*/
 				
 				// On recupère l'id du fournisseur:
+				String commentaire=rs.getString("commentaire");
+				int quantiteVendue=rs.getInt("quantitevendue");
 				int idFournisseur = rs.getInt("fournisseur");
 				
 				// On recupère le fournisseur en base de données:
 				Fournisseur fournisseur = this.findFournisseurById(idFournisseur);
 				
-				produit = new Produit(idProduit, nomProduit, prixUnitaire, quantiteProduit, fournisseur);
+				produit = new Produit(idProduit, nomProduit, prixUnitaire, quantiteProduit,quantiteVendue, fournisseur,commentaire);
 				
 			}
 			
@@ -418,7 +421,8 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			if (rs.next()) {
 				int idProduit = rs.getInt("id");
 				String nomProduit = rs.getString("nom");
-				double prixUnitaire = rs.getDouble("prix");
+				//double prixUnitaire = rs.getDouble("prix");
+				int prixUnitaire = rs.getInt("prix");
 				int quantiteProduit = rs.getInt("quantite");
 				/*boolean lot = rs.getBoolean("lot"); 
 				String commentaire;
@@ -474,10 +478,12 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String nom = rs.getString("nom");
-				double prix = rs.getDouble("prix");
+				//double prix = rs.getDouble("prix");
+				int prix = rs.getInt("prix");
 				int quantite = rs.getInt("quantite");
 				boolean lot = rs.getBoolean("lot");
-				double prixLot = rs.getDouble("prixLot");
+				//double prixLot = rs.getDouble("prixLot");
+				int prixLot = rs.getInt("prixLot");
 				boolean enVente = rs.getBoolean("enVente");
 				String commentaire = rs.getString("commentaire");
 				
@@ -524,10 +530,12 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String nom = rs.getString("nom");
-				double prix = rs.getDouble("prix");
+				int prix = rs.getInt("prix");
+				//double prix = rs.getDouble("prix");
 				int quantite = rs.getInt("quantite");
 				boolean lot = rs.getBoolean("lot");
-				double prixLot = rs.getDouble("prixLot");
+				int prixLot = rs.getInt("prixLot");
+				//double prixLot = rs.getDouble("prixLot");
 				boolean enVente = rs.getBoolean("enVente");
 				String commentaire = rs.getString("commentaire");
 				
@@ -729,18 +737,40 @@ public class ProduitDAOMySQL implements ProduitDAO {
 			if ((produit != null) && (!produit.getNomProduit().equals(""))){
 				/* La requête pour le update: */
 				System.out.println("debut de la mise à jour");
-				statement = connexion.prepareStatement("UPDATE Produits SET nom=?, prix=?, quantite=?, fournisseur=?, lot=?, prixLot=?, enVente=?, commentaire=? WHERE id=?");
-				
+				statement = connexion.prepareStatement("UPDATE Produits SET nom=?, prix=?, quantite=?,quantiteVendue=? ,fournisseur=?, lot=?, prixLot=?, enVente=?, commentaire=? WHERE id=?");
+				// UPDATE Produits 
+				//SET nom="nommodifer", prix=3, quantite=2, quantiteVendue=1, fournisseur=78, lot="oui", prixLot=0, enVente="oui", commentaire="commentaire"
+				//		WHERE id=78
 				/* Les champs/valeurs utils pour la mise à jour du produit: */
+				System.out.println(prod);
+			
 				statement.setString(1, prod.getNomProduit());
-				statement.setDouble(2, prod.getPrixUnitaire());
+				//statement.setString(1, "nomproduit");
+				statement.setInt(2, prod.getPrixUnitaire());
+				//statement.setInt(2,1);
 				statement.setInt(3, prod.getQuantiteProduit());
+				//statement.setInt(3,1);
+				statement.setInt(4, prod.getQuantiteVendue());
+				//statement.setInt(4,1);
 				int idFournisseur = prod.getProprietaire().getId();
-				statement.setInt(4, idFournisseur);
-				statement.setBoolean(5, prod.isLot());
-				statement.setBoolean(6, prod.isEnVente());
-				statement.setString(7, prod.getCommentaire());
-				statement.setInt(8, prod.getId());
+				
+				statement.setInt(5, idFournisseur);
+				
+				statement.setBoolean(6, prod.isLot());
+				//statement.setString(6, "faux");
+				// recup prix lot
+				statement.setInt(7, prod.getPrixLot());
+				// recup en vente
+				//statement.setInt(7,0);
+				statement.setBoolean(8, prod.isEnVente());
+				//statement.setString(8, "fo");
+				
+				// recup commentaire
+				statement.setString(9, prod.getCommentaire());
+				//statement.setInt(9, 1);
+				
+				// recup id
+				statement.setInt(10, prod.getId());
 				
 				/* Execution de la requête de la mise à jour du produit: */
 				statement.executeUpdate();
@@ -750,7 +780,70 @@ public class ProduitDAOMySQL implements ProduitDAO {
 		}					
 
 	} /* Fin methode update. */
+	@Override
+	public void update(Fournisseur fournisseur) throws DAOException {
+		Connection connexion = null;
+		try {
+			/* driver MySQL */
+			try {
+				Class.forName(NOM_DRIVER);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/* Connexion à la base de données: */
+			connexion = DriverManager.getConnection(url, user, password);
+			/* Preparation de l'objet qui gère la requête: */
+			PreparedStatement statement;
+			
+			/* On recherche le produit en base de données: */
+			int id =fournisseur.getId();
+			Fournisseur fourni;
+			
+				fournisseur = this.findFournisseurById(id);
+			
+			
+			
+			/* Si le produit existe, le mettre à jour: */
+			if ((fournisseur != null) && (!fournisseur.getNom().equals(""))){
+				/* La requête pour le update: */
+				System.out.println("debut de la mise à jour");
+				statement = connexion.prepareStatement("UPDATE fournisseur SET nom=?, adresse=?, telephone=?,email=?  WHERE id=?");
+				// UPDATE Produits 
+				//SET nom="nommodifer", prix=3, quantite=2, quantiteVendue=1, fournisseur=78, lot="oui", prixLot=0, enVente="oui", commentaire="commentaire"
+				//		WHERE id=78
+				/* Les champs/valeurs utils pour la mise à jour du produit: */
+				System.out.println(fournisseur);
+			
+				statement.setString(1, fournisseur.getNom());
+				//statement.setString(1, "nomproduit");
+				statement.setString(2, fournisseur.getAdresse());
+				//statement.setInt(2,1);
+				statement.setString(3, fournisseur.getTelephone());
+				//statement.setInt(3
+				statement.setString(4,fournisseur.getEmail() );
+				//statement.setInt(4,1);
+				int idFournisseur = fournisseur.getId();
+				statement.setInt(4,idFournisseur);
 
+				
+				/* Execution de la requête de la mise à jour du fournisseur: */
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (connexion != null)
+				try {
+					connexion.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}	
+		
+	}
 	
 	// Methode pour mettre en vente un produit qui existe en base de données:
 	public void miseEnVente (Produit produit) throws Exception {
@@ -779,6 +872,8 @@ public class ProduitDAOMySQL implements ProduitDAO {
 		}	
 		
 	}
+
+	
 	
 	
 	/*

@@ -17,18 +17,19 @@
 	<label>Prix unitaire : </label> <input name="prixUnitaire" required type="text" value="${produit.getPrixUnitaire()}"/>${erreurs["prixUnitaire"]}</p>
 	<label>Quantité : </label> <input name="quantite" required type="text" value="${produit.getQuantiteProduit()}"/>${erreurs["quantite"]}</p>
 	<label>quantité vendu : </label> <input name="quantitevendu" required type="text" value="${produit.getQuantiteVendue()}"/>${erreurs["commentaire"]}</p>
-	<label>commentaire : </label> <input name="commentaire" required type="text" value="${produit.getCommentaire()}"/>${erreurs["commentaire"]}</p>
-	<label>en vente : </label> <input name="enVente" required type="text" value="${produit.isEnVente()}"/>${erreurs["commentaire"]}</p>
+	<label>Commentaire : </label> <input name="commentaire" required type="text" value="${produit.getCommentaire()}"/>${erreurs["commentaire"]}</p>
+	<label>En vente : </label> <input name="enVente" required type="text" value="${produit.isEnVente()}"/>${erreurs["commentaire"]}</p>
+	<p> Type<input name="type"  type="text" value="${param.type}" /></p>
 	
+	<p> <input name="idP"  type="text" Hidden=true value="${produit.getId()}" /></p>
+	<p> <input name="idF"  type="text" Hidden=true value="${produit.getProprietaire().getId()}" /></p>
 	
-	<p> <input name="idP"  type="text" Hidden=true value="${produit.getId()}" />${erreurs["nomProduit"]}</p>
-	<p> <input name="idF"  type="text" Hidden=true value="${produit.getProprietaire().getId()}" />${erreurs["nomProduit"]}</p>
  <input type="submit" class="btn btn-lg btn-success" value="Confirmer" name="action"/> <bold>${error}</bold>
 </form>
 
 <a href="${retourlisteProduits}" >retour</a>
 <div class="footer">
-        <p>&alright; G2L2 Corp 2014</p>
+        <p> G2L2 Corp 2014</p>
       </div>
       </div>
       </div>

@@ -9,18 +9,18 @@ public class Produit {
 	//private String id;
 	private int id;
 	private String nomProduit;
-	private double prixUnitaire;
+	private int prixUnitaire;
 	private int quantiteProduit;
 	private int quantiteVendue;
 	private boolean lot;
-	private double prixLot;
+	private int prixLot;
 	private Fournisseur proprietaire;
 	private String commentaire;
 	private boolean enVente;
 	
 	// Les Constructeurs:
-	public Produit(int id, String nomProduit, double prixUnitaire,
-			int quantiteProduit, boolean lot, double prixLot,
+	public Produit(int id, String nomProduit, int prixUnitaire,
+			int quantiteProduit, boolean lot, int prixLot,
 			Fournisseur proprietaire, String commentaire, boolean enVente) {
 		this.id = id;
 		this.idProduit++;
@@ -34,7 +34,7 @@ public class Produit {
 		this.enVente = false;
 	}
 
-	public Produit(int id, String nomProduit, double prixUnitaire,
+	public Produit(int id, String nomProduit, int prixUnitaire,
 			int quantiteProduit, int quantiteVendue,Fournisseur proprietaire, String commentaire) {
 		this.id = id;
 		this.idProduit++;
@@ -46,8 +46,8 @@ public class Produit {
 		this.commentaire = commentaire;
 	}
 	
-	public Produit(String nomProduit, double prixUnitaire,
-			int quantiteProduit, boolean lot, double prixLot,
+	public Produit(String nomProduit, int prixUnitaire,
+			int quantiteProduit, boolean lot, int prixLot,
 			Fournisseur proprietaire, String commentaire, boolean enVente) {
 		this.idProduit++;
 		this.id = this.idProduit;
@@ -61,7 +61,7 @@ public class Produit {
 		this.enVente = false;
 	}
 	
-	public Produit(String nomProduit, double prixVente,
+	public Produit(String nomProduit, int prixVente,
 			int quantiteProduit, Fournisseur proprietaire) {
 		this.idProduit++;
 		this.id = this.idProduit;
@@ -72,7 +72,7 @@ public class Produit {
 		this.commentaire = "";
 		this.enVente = false;
 	}
-	public Produit(String nomProduit, double prixVente,
+	public Produit(String nomProduit, int prixVente,
 			int quantiteProduit, Fournisseur proprietaire,String Comm) {
 		this.idProduit++;
 		this.id = this.idProduit;
@@ -83,7 +83,7 @@ public class Produit {
 		this.commentaire =Comm;
 	}
 	
-	public Produit(int id, String nomProduit, double prixVente,
+	public Produit(int id, String nomProduit, int prixVente,
 			int quantiteProduit, Fournisseur proprietaire) {
 		this.idProduit++;
 		this.id = id;
@@ -112,11 +112,11 @@ public class Produit {
 		this.nomProduit = nomProduit;
 	}
 
-	public double getPrixUnitaire() {
+	public int getPrixUnitaire() {
 		return prixUnitaire;
 	}
 
-	public void setPrixUnitaire(double prixUnitaire) {
+	public void setPrixUnitaire(int prixUnitaire) {
 		this.prixUnitaire = prixUnitaire;
 	}
 
@@ -133,7 +133,7 @@ public class Produit {
 	}
 
 	public void setQuantiteVendue(int quantiteProduit) {
-		this.quantiteVendue = quantiteVendue;
+		this.quantiteVendue = quantiteProduit;
 	}
 	
 	public boolean isLot() {
@@ -167,6 +167,7 @@ public class Produit {
 	public void setEnVente(boolean enVente) {
 		this.enVente = enVente;
 	}
+	
 	
 	// Methode toString
 	@Override
@@ -236,7 +237,7 @@ public class Produit {
 		return true;
 	}
 
-	public double getPrixLot() {
+	public int getPrixLot() {
 		return this.prixLot;
 	}
 

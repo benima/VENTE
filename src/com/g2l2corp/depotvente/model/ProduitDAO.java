@@ -11,8 +11,9 @@ public interface ProduitDAO {
 	Collection<Produit> findAll() throws SQLException;
 	void create(Produit produit) throws DAOException, SQLException;
 	void delete(Produit produit) throws DAOException, Exception;
-	// void update(Produit produit int id) throws DAOException;
-	void update(Produit produit) throws Exception;
+	//void update(Produit produit int id) throws DAOException;
+	void update(Produit produit) throws DAOException, Exception;
+	void update(Fournisseur fournisseur) throws DAOException;
 	//Collection<Produit> findAllByProvider(Utilisateur utilisateur);
 	Collection<Produit> produitsEnVente() throws DAOException;
 	Collection<Produit> listeProduits() throws DAOException;
