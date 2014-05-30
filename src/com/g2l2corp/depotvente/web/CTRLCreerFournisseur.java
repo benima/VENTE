@@ -112,31 +112,36 @@ public class CTRLCreerFournisseur extends HttpServlet {
 		}
 		if ((action != null) && (action.equals("Modifier"))) {
 			HttpSession session = request.getSession();
+			;
 			String id = request.getParameter("idfournisseur");
 			int idFournisseur = Integer.parseInt(id);
-			System.out.println("id produit : " + idFournisseur);
+			System.out.println("id fournisseur : " + idFournisseur);
 			Fournisseur fournimodif = null;
 
 			try {
 				fournimodif = fournidao.findFournisseurById(idFournisseur);
 				System.out.println("nom fournisseur : " + fournimodif.getNom());
-				session.setAttribute("fournisseur", fournimodif);
-				request.setAttribute("adrfourni", fournimodif.getAdresse());
-				request.setAttribute("telfourni", fournimodif.getTelephone());
-				request.setAttribute("emailfourni", fournimodif.getEmail());
-				RequestDispatcher rd = request
-						.getRequestDispatcher("fournisseur.jsp");
-				rd.forward(request, response);
+				System.out.println("adresse : " + fournimodif.getAdresse());
+				System.out.println(" email : " + fournimodif.getEmail());
+				System.out.println("telephone : " + fournimodif.getTelephone());
+				
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("aucun produit ne correspond à l'id");
+				System.out.println("aucun founrisseir ne correspond à l'id");
 				RequestDispatcher rd = request
 						.getRequestDispatcher("modifsupfournisseur.jsp");
 				rd.forward(request, response);
 			}
-
+			request.setAttribute("fournisseur", fournimodif);
+			RequestDispatcher rd = request
+					.getRequestDispatcher("confsupmodiffournisseur.jsp");
+			rd.forward(request, response);
 		}
+		if ((action != null) && (action.equals("confirmer"))) {
+			HttpSession session = request.getSession();
+		}
+			
 
 	}
 }

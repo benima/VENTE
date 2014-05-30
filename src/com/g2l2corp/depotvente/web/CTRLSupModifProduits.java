@@ -122,7 +122,8 @@ public class CTRLSupModifProduits extends HttpServlet {
 			int idFournisseur= Integer.parseInt(idF);
 			int idProduit= Integer.parseInt(idP);
 			int Qte=Integer.parseInt(Qu);
-			double prixUnitaire=Integer.parseInt(Puni);
+			int prixUnitaire=Integer.parseInt(Puni);
+			
 			
 			try {
 				// recherche du fournisseur associer au produit à modifier
@@ -163,12 +164,7 @@ public class CTRLSupModifProduits extends HttpServlet {
 				rd.forward(request, response);
 				return;
 			}
-			if (session.getAttribute("type").equals("Supprimer")) {
-				
-			}
-			if (session.getAttribute("type").equals("Modifier")) {
-				
-			}
+			System.out.println("produit modifier");
 			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 			rd.forward(request, response);
 		}

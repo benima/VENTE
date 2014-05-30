@@ -18,7 +18,7 @@
 	<label>Telephone : </label> <input name="telfourni" type="text" value="${fournisseur.getTelephone()}"/>${erreurs["telfourni"]}</p>
 	<p>
 	<label>Email : </label> <input name="emailfourni" type="text" value="${fournisseur.getEmail()}"/>${erreurs["emailfourni"]}</p>
-<input type="submit" class="btn btn-lg btn-success" value="Enregistrer" name="action"/>
+<input type="submit" class="btn btn-lg btn-success" value="confirmer" name="action"/>
 </form>
 </div>
 <a href="${accueilURL}" >Accueil</a>

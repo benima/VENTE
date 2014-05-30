@@ -16,7 +16,9 @@
 	<p>
 	<label>Prix unitaire : </label> <input name="prixUnitaire" required type="text" value="${produit.getPrixUnitaire()}"/>${erreurs["prixUnitaire"]}</p>
 	<label>Quantité : </label> <input name="quantite" required type="text" value="${produit.getQuantiteProduit()}"/>${erreurs["quantite"]}</p>
+	<label>quantité vendu : </label> <input name="quantitevendu" required type="text" value="${produit.getQuantiteVendue()}"/>${erreurs["commentaire"]}</p>
 	<label>commentaire : </label> <input name="commentaire" required type="text" value="${produit.getCommentaire()}"/>${erreurs["commentaire"]}</p>
+	<label>en vente : </label> <input name="enVente" required type="text" value="${produit.isEnVente()}"/>${erreurs["commentaire"]}</p>
 	
 	
 	<p> <input name="idP"  type="text" Hidden=true value="${produit.getId()}" />${erreurs["nomProduit"]}</p>
